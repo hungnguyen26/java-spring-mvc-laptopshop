@@ -7,28 +7,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hungnguyen.laptop_shop.service.UserService;
 
-// @Controller
-// public class UserController {
-    
-//     @RequestMapping("/")
-//     public String getHomePage(){
-//         return "hello";
-//     }
-// }
-
-@RestController
+@Controller
 public class UserController {
-    
-    private UserService userService;
 
+    private UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-
-    @GetMapping("/")
-    public String getHomePage(){
-        return this.userService.hanldeHello();
+    @RequestMapping("/")
+    public String getHomePage() {
+        String test = this.userService.hanldeHello();
+        return "hello" ;
     }
 }
+
+// @RestController
+// public class UserController {
+
+// private UserService userService;
+
+// public UserController(UserService userService) {
+// this.userService = userService;
+// }
+
+// @GetMapping("/")
+// public String getHomePage(){
+// return this.userService.hanldeHello();
+// }
+// }
