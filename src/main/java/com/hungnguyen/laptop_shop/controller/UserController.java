@@ -2,9 +2,7 @@ package com.hungnguyen.laptop_shop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.hungnguyen.laptop_shop.service.UserService;
 
@@ -21,8 +19,12 @@ public class UserController {
     public String getHomePage(Model model) {
         String test = this.userService.hanldeHello();
         model.addAttribute("bin", test);
-        model.addAttribute("hungnguyen", "aksdaisdhjas");
         return "hello" ;
+    }
+
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        return "admin/user/create" ;
     }
 }
 
