@@ -37,7 +37,6 @@ public class UserController {
     @ResponseBody
     public String createUserPage(Model model, @ModelAttribute("newUser") User bin) {
         System.out.println("run here" + bin);
-        // System.out.println();
         return "hello" ;
     }
 }
