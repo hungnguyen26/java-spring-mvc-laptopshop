@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hungnguyen.laptop_shop.domain.User;
+import com.hungnguyen.laptop_shop.repository.UserRepository;
 import com.hungnguyen.laptop_shop.service.UserService;
 
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -21,8 +22,8 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.hanldeHello();
-        model.addAttribute("bin", test);
+        model.addAttribute("bin", "test");
+        model.addAttribute("bin", "from controller");
         return "hello" ;
     }
 
@@ -37,6 +38,7 @@ public class UserController {
     @ResponseBody
     public String createUserPage(Model model, @ModelAttribute("newUser") User bin) {
         System.out.println("run here" + bin);
+        this.userService.handleSaveUser(bin);
         return "hello" ;
     }
 }
