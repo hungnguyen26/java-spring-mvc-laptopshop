@@ -6,7 +6,7 @@ uri="http://www.springframework.org/tags/form" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Detail ${id}</title>
+    <title>User Detail ${user.id}</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -34,13 +34,14 @@ uri="http://www.springframework.org/tags/form" %>
               User Infomation
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">ID: ${id}</li>
-              <li class="list-group-item">Eamil: </li>
-              <li class="list-group-item">Full Name:</li>
-              <li class="list-group-item">Address :</li>
+              <li class="list-group-item">ID: ${user.id}</li>
+              <li class="list-group-item">Email: ${user.email} </li>
+              <li class="list-group-item">Full Name: ${user.fullName}</li>
+              <li class="list-group-item">Address : ${user.address}</li>
               
             </ul>
           </div>
+          <a href="/admin/user" class="btn btn-success mt-3">Back</a>
           
         </div>
       </div>
