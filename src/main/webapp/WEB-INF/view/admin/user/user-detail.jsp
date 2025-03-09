@@ -6,7 +6,7 @@ uri="http://www.springframework.org/tags/form" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>User Detail ${id}</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -24,38 +24,24 @@ uri="http://www.springframework.org/tags/form" %>
       <div class="row">
         <div class="col-12 mx-auto">
           <div class="d-flex justify-content-between">
-            <h3>Table User</h3>
+            <h3>User detail with id = ${id}</h3>
             <a href="/admin/user/create" class="btn btn-primary">Create User</a>
           </div>
 
           <hr />
-
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Email</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach items="${users}" var="user"> 
-                <tr>
-                  <th>${user.id}</th>
-                  <td>${user.email}</td>
-                  <td>${user.fullName}</td>
-                  <td>
-                    <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
-                    <button class="btn btn-warning mx-2">Update</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              </c:forEach>
-            
+          <div class="card" style="width: 60%;">
+            <div class="card-header">
+              User Infomation
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">ID: ${id}</li>
+              <li class="list-group-item">Eamil: </li>
+              <li class="list-group-item">Full Name:</li>
+              <li class="list-group-item">Address :</li>
               
-            </tbody>
-          </table>
+            </ul>
+          </div>
+          
         </div>
       </div>
     </div>
