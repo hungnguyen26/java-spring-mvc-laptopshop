@@ -59,5 +59,11 @@ public class UserController {
         this.userService.handleSaveUser(bin);
         return "redirect:/admin/user" ;
     }
+
+    @RequestMapping("/admin/user/update/{id}")
+    public String getUserUpdatePage(Model model, @PathVariable long id) {
+        model.addAttribute("newUser", new User()); 
+        return "admin/user/user-update" ;
+    }
 }
 
