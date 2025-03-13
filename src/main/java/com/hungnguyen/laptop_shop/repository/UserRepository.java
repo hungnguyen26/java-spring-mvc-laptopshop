@@ -11,9 +11,12 @@ import com.hungnguyen.laptop_shop.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User hungnguyen);
 
+    void deleteById(long id);
+
     List<User> findByEmail(String email);
 
     List<User> findAll();
 
     User findById(long id);
+
 }
