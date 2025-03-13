@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,8 +63,22 @@ public class UserController {
 
     @RequestMapping("/admin/user/update/{id}")
     public String getUserUpdatePage(Model model, @PathVariable long id) {
-        model.addAttribute("newUser", new User()); 
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("newUser", currentUser); 
         return "admin/user/user-update" ;
     }
-}
+
+    @PostMapping("/admin/user/update")
+    public String postUserUpdate(Model model,@ModelAttribute("newUser") User bin) {
+        User currentUser = this.userService.getUserById(bin.getId());
+        if(currentUser != null){
+            currentUser.setAddress(bin.getAddress());
+            currentUser.setFullName(bin.getFullName());
+            currentUser.setPhone(bin.getPhone());
+
+            this.userService.handleSaveUser(bin);
+        }
+        return "redirect:/admin/user" ;
+    }
+} 
 
