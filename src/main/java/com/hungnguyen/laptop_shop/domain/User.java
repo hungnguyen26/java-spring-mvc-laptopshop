@@ -1,11 +1,18 @@
 package com.hungnguyen.laptop_shop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -13,6 +20,15 @@ public class User {
     private long id;
 
     private String email, password, fullName, address, phone, avatar;
+
+    // role_id
+    // User many -> to one -> role
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
     
     public long getId() {
         return id;
