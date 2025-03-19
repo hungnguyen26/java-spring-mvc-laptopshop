@@ -12,7 +12,7 @@ uri="http://www.springframework.org/tags/form" %>
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Create User</title>
+    <title>Update User</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -26,24 +26,24 @@ uri="http://www.springframework.org/tags/form" %>
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Create Users</h1>
+            <h1 class="mt-4">Update Users</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Create Users</li>
+              <li class="breadcrumb-item active">Update Users</li>
             </ol>
-            <div class="mt-5">
+            <div class=" mt-5">
                 <div class="row">
                     <div class="col-md-6 col-12 mx-auto">
-                        <h3>Create User</h3>
+                        <h3>Update User</h3>
                         <hr/>
-                        <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
-                            <div class="mb-3">
-                              <label for="form-label">Email:</label>
-                              <form:input type="email" class="form-control" path="email"/>
+                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
+                            <div class="mb-3" style="display:none">
+                              <label for="form-label">Id:</label>
+                              <form:input type="text" class="form-control" path="id" />
                             </div>
                             <div class="mb-3">
-                              <label for="form-label">Password:</label>
-                              <form:input type="password" class="form-control" path="password"/>
+                              <label for="form-label">Email:</label>
+                              <form:input type="email" class="form-control" path="email" disabled="true"/>
                             </div>
                             <div class="mb-3">
                                 <label for="form-label">Phone number:</label>
@@ -58,7 +58,7 @@ uri="http://www.springframework.org/tags/form" %>
                                 <form:input type="text" class="form-control" path="address"/>
                             </div>
         
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                           </form:form>
                     </div>
                 </div>

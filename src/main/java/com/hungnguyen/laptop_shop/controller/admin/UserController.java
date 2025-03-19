@@ -1,4 +1,4 @@
-package com.hungnguyen.laptop_shop.controller;
+package com.hungnguyen.laptop_shop.controller.admin;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class UserController {
         List<User> users = userService.getAllUsers();
         // System.out.println(">>>check user"+ users);
         model.addAttribute("users", users); // truyền dữ liệu qua view
-        return "admin/user/table-user" ;
+        return "admin/user/show" ;
     }
 
     @RequestMapping("/admin/user/{id}")
@@ -47,7 +47,7 @@ public class UserController {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user); 
         System.out.println(user);
-        return "admin/user/user-detail" ;
+        return "admin/user/detail" ;
     }
 
     @RequestMapping("/admin/user/create")  // GET
@@ -66,7 +66,7 @@ public class UserController {
     public String getUserUpdatePage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser); 
-        return "admin/user/user-update" ;
+        return "admin/user/update" ;
     }
 
     @PostMapping("/admin/user/update")
@@ -86,7 +86,7 @@ public class UserController {
     public String getUserDeletePage(Model model, @PathVariable long id) {
         model.addAttribute("id", id); 
         model.addAttribute("newUser", new User()); 
-        return "admin/user/user-delete" ;
+        return "admin/user/delete" ;
     }
     @PostMapping("/admin/user/delete")
     public String postUserDeletePage(Model model,@ModelAttribute("newUser") User bin) {
