@@ -1,11 +1,9 @@
 package com.hungnguyen.laptop_shop.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hungnguyen.laptop_shop.domain.User;
-import com.hungnguyen.laptop_shop.repository.UserRepository;
 import com.hungnguyen.laptop_shop.service.UploadService;
 import com.hungnguyen.laptop_shop.service.UserService;
 
@@ -27,13 +23,15 @@ import jakarta.servlet.ServletContext;
 @Controller
 public class UserController {
 
-
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UploadService uploadService,UserService userService, ServletContext servletContext) {
+    public UserController(UploadService uploadService, UserService userService, ServletContext servletContext,
+            PasswordEncoder passwordEncoder) {
         this.uploadService = uploadService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -68,12 +66,17 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User bin,
-            @RequestParam("hoidanitFile") MultipartFile file) {
+    public String createUserPage(Model model, @ModelAttribute("newUser") User bin, @RequestParam("hoidanitFile") MultipartFile file) {
 
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(bin.getPassword());
 
-          String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        // this.userService.handleSaveUser(bin)  ;
+        bin.setAvatar(avatar);
+        bin.setPassword(hashPassword);
+
+        bin.setRole(this.userService.getRoleByName(bin.getRole().getName()));
+
+        this.userService.handleSaveUser(bin);
         return "redirect:/admin/user";
     }
 
