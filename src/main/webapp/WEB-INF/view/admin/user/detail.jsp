@@ -49,6 +49,10 @@ uri="http://www.springframework.org/tags/form" %>
                       <li class="list-group-item">Email: ${user.email} </li>
                       <li class="list-group-item">Full Name: ${user.fullName}</li>
                       <li class="list-group-item">Address : ${user.address}</li>
+                      <li class="list-group-item">Role : ${user.role.name}</li>
+                      <li class="list-group-item">Avatar : 
+                        <img src="${user.avatar}" alt="">
+                      </li>
                       
                     </ul>
                   </div>

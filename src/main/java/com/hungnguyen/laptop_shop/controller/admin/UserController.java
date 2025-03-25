@@ -2,7 +2,6 @@ package com.hungnguyen.laptop_shop.controller.admin;
 
 import java.util.List;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import com.hungnguyen.laptop_shop.domain.User;
 import com.hungnguyen.laptop_shop.service.UploadService;
 import com.hungnguyen.laptop_shop.service.UserService;
 
-import jakarta.servlet.ServletContext;
 
 @Controller
 public class UserController {
@@ -27,8 +25,7 @@ public class UserController {
     private final UploadService uploadService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UploadService uploadService, UserService userService, ServletContext servletContext,
-            PasswordEncoder passwordEncoder) {
+    public UserController(UploadService uploadService, UserService userService, PasswordEncoder passwordEncoder) {
         this.uploadService = uploadService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -55,7 +52,7 @@ public class UserController {
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user);
-        System.out.println(user);
+        // System.out.println(user);
         return "admin/user/detail";
     }
 
