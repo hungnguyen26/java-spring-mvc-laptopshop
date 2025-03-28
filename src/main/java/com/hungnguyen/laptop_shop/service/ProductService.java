@@ -1,6 +1,7 @@
 package com.hungnguyen.laptop_shop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class ProductService {
 
     public List<Product> getAllProduct(){
         return this.productRepository.findAll();
+    }
+
+    public Optional<Product> getProductById(long id){
+        return this.productRepository.findById(id);
     }
     
 }
