@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hungnguyen.laptop_shop.domain.Product;
+import com.hungnguyen.laptop_shop.domain.User;
 import com.hungnguyen.laptop_shop.service.ProductService;
 import com.hungnguyen.laptop_shop.service.UploadService;
 
@@ -45,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String postMethodName(Model model, 
+    public String postCreateProduct(Model model, 
             @ModelAttribute("newProduct") @Valid Product pr,
             BindingResult newProductBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
@@ -63,11 +64,24 @@ public class ProductController {
     }
  
     @GetMapping("/admin/product/{id}")
-    public String getMethodName(@PathVariable long id, Model model) {
+    public String getdDetailProduct(@PathVariable long id, Model model) {
         Product pr = this.productService.getProductById(id).get();
         model.addAttribute("product", pr);
         model.addAttribute("id", id);
         return "admin/product/detail";
+    }
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String getDeleteProduct(Model model, @PathVariable long id) {
+         model.addAttribute("id", id);
+        model.addAttribute("newProduct", new Product());
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String getPostDeleteProduct(Model model, @ModelAttribute("newProduct") Product pr) {
+        this.productService.deleteProductById(pr.getId());
+        return "redirect:/admin/product";
     }
     
 }
