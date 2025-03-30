@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hungnguyen.laptop_shop.domain.Product;
-import com.hungnguyen.laptop_shop.domain.User;
 import com.hungnguyen.laptop_shop.service.ProductService;
 import com.hungnguyen.laptop_shop.service.UploadService;
 
@@ -20,7 +19,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
