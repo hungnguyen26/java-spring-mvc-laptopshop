@@ -7,7 +7,7 @@ uri="http://www.springframework.org/tags/form" %>
       
       <div class="container px-0">
           <nav class="navbar navbar-light bg-white navbar-expand-xl">
-              <a href="" class="navbar-brand"><h1 class="text-primary display-6">Laptop Shop</h1></a>
+              <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Laptop Shop</h1></a>
               <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                   <span class="fa fa-bars text-primary"></span>
               </button>
