@@ -14,10 +14,18 @@ import com.hungnguyen.laptop_shop.service.ProductService;
 @Controller
 public class ProductClientController {
     
-    
+    private final ProductService productService;
+
+    public ProductClientController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/product/{id}")
     public String getProductDetail(Model model,@PathVariable Long id) {
+        Product product = this.productService.getProductById(id).get();
+        model.addAttribute("product", product);
+        model.addAttribute("id", id);
+
         return "client/product/detail";
     }
     
