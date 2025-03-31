@@ -30,9 +30,6 @@ public class ProductClientController {
     }
     
 
-    @GetMapping("/register")
-    public String getRegisterPage(Model model) {
-        return "client/auth/register";
-    }
+    
     
 }
