@@ -2,14 +2,18 @@ package com.hungnguyen.laptop_shop.controller.client;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.hungnguyen.laptop_shop.domain.Product;
+import com.hungnguyen.laptop_shop.domain.User;
 import com.hungnguyen.laptop_shop.domain.DTO.RegisterDTO;
 import com.hungnguyen.laptop_shop.service.ProductService;
+import com.hungnguyen.laptop_shop.service.UserService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,9 +23,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class HomePageController {
 
     private final ProductService productService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public HomePageController(ProductService productService) {
+    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
         this.productService = productService;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -39,8 +47,19 @@ public class HomePageController {
 
     @PostMapping("/register")
     public String postRegisterPage(@ModelAttribute("registerUser") RegisterDTO registerDTO) {
-        System.out.println("========================"+registerDTO.toString());
-        return "client/auth/register";
+        User user = this.userService.registerDTOtoUser(registerDTO);
+
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName("USER"));
+
+        this.userService.handleSaveUser(user);
+        return "redirect:/login";
     }
     
+    @GetMapping("/login")
+    public String getLoginPage(Model model) {
+        return "client/auth/login";
+    }
 }
