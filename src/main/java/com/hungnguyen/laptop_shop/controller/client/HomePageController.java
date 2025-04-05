@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -14,10 +16,10 @@ import com.hungnguyen.laptop_shop.domain.DTO.RegisterDTO;
 import com.hungnguyen.laptop_shop.service.ProductService;
 import com.hungnguyen.laptop_shop.service.UserService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @Controller
 public class HomePageController {
@@ -33,7 +35,7 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getHomePage(Model model){
+    public String getHomePage(Model model) {
         List<Product> products = this.productService.getAllProduct();
         model.addAttribute("products", products);
         return "client/homepage/show";
@@ -46,8 +48,14 @@ public class HomePageController {
     }
 
     @PostMapping("/register")
-    public String postRegisterPage(@ModelAttribute("registerUser") RegisterDTO registerDTO) {
+    public String postRegisterPage(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
+            BindingResult bindingResult) {
         User user = this.userService.registerDTOtoUser(registerDTO);
+
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        }
 
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
 
@@ -57,7 +65,7 @@ public class HomePageController {
         this.userService.handleSaveUser(user);
         return "redirect:/login";
     }
-    
+
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         return "client/auth/login";

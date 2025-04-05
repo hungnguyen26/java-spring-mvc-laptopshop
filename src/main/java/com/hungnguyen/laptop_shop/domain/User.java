@@ -2,6 +2,8 @@ package com.hungnguyen.laptop_shop.domain;
 
 import java.util.List;
 
+import com.hungnguyen.laptop_shop.service.validator.StrongPassword;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class User {
 
     @NotNull
     @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
+    @StrongPassword(message = "Pass phải có 8 ký tự ....")
     private String password;
 
     @NotNull
