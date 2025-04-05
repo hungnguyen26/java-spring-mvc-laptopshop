@@ -8,8 +8,7 @@ public class RegisterDTO {
     private String lastName;
     private String email;
     private String password;
-    private String comfirmPassword;
-    
+    private String confirmPassword;
     public String getFirstName() {
         return firstName;
     }
@@ -34,16 +33,17 @@ public class RegisterDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getComfirmPassword() {
-        return comfirmPassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
-    public void setComfirmPassword(String comfirmPassword) {
-        this.comfirmPassword = comfirmPassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
-
     @Override
     public String toString() {
         return "RegisterDTO [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
-                + password + ", comfirmPassword=" + comfirmPassword + "]";
+                + password + ", confirmPassword=" + confirmPassword + "]";
     }
+    
+    
 }

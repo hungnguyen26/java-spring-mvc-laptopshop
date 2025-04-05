@@ -52,9 +52,14 @@ public class HomePageController {
             BindingResult bindingResult) {
         User user = this.userService.registerDTOtoUser(registerDTO);
 
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        // List<FieldError> errors = bindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        //     System.out.println(">>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        // }
+
+        //
+        if(bindingResult.hasErrors()){
+            return "client/auth/register";
         }
 
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
