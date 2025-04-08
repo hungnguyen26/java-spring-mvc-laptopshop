@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hungnguyen.laptop_shop.domain.Product;
 import com.hungnguyen.laptop_shop.service.ProductService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 

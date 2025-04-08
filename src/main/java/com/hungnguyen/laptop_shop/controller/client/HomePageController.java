@@ -19,7 +19,6 @@ import com.hungnguyen.laptop_shop.service.UserService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomePageController {

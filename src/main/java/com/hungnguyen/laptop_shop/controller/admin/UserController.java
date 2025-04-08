@@ -79,7 +79,7 @@ public class UserController {
 
         // validdate
         if(newUserBindingResult.hasErrors()){
-            return "/admin/user/create";
+            return "admin/user/create";
         }
 
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
