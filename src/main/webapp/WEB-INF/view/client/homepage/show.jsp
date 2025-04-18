@@ -83,11 +83,14 @@ uri="http://www.springframework.org/tags/form" %>
                                                         </a>
                                                     </h4>
                                                     <p style="font-size: 13px; " class="text-dark fw-bold mb-3">${product.shortDesc}</p>
-                                                    <div class="d-flex flex-lg-wrap">
+                                                    <div class="d-flex flex-lg-wrap justify-content-center">
                                                         <p class="text-dark fs-5 fw-bold mb-0" style="text-align: center; width: 100%;font-size: 15px;">
                                                             <fmt:formatNumber type="number" value="${product.price}" /> đ
                                                         </p>
-                                                        <a href="#" class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                        <form action="/add-product-to-cart/${product.id}" method="post">
+                                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                            <button class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
