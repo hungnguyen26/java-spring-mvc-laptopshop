@@ -63,9 +63,9 @@ uri="http://www.springframework.org/tags/form" %>
                       border-radius: 50%;
                       overflow: hidden;
                     "
-                    src="/images/product/1711078092373-asus-01.png"
+                    src="/images/avatar/${sessionScope.avatar}"
                   />
-                  <c:out value="${pageContext.request.userPrincipal.name}" />
+                  <c:out value="${sessionScope.fullName}" />
                 </li>
                 <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
                 <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
