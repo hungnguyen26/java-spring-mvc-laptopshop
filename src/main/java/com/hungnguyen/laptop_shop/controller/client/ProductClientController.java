@@ -1,5 +1,6 @@
 package com.hungnguyen.laptop_shop.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -59,7 +59,7 @@ public class ProductClientController {
 
         Cart cart = this.productService.fechCartByUser(currentUser);
 
-        List<CartDetail> cartDetails = cart.getCartDetails();
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
 
         double totalPrice = 0;
         for (CartDetail cartDetail : cartDetails) {
