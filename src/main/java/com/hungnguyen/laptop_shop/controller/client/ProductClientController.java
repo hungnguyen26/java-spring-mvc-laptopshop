@@ -1,11 +1,16 @@
 package com.hungnguyen.laptop_shop.controller.client;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hungnguyen.laptop_shop.domain.Cart;
+import com.hungnguyen.laptop_shop.domain.CartDetail;
 import com.hungnguyen.laptop_shop.domain.Product;
+import com.hungnguyen.laptop_shop.domain.User;
 import com.hungnguyen.laptop_shop.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +51,22 @@ public class ProductClientController {
     }
     
     @GetMapping("/cart")
-    public String getCartPage(Model model){
+    public String getCartPage(Model model,HttpServletRequest request){
+        User currentUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+
+        Cart cart = this.productService.fechCartByUser(currentUser);
+
+        List<CartDetail> cartDetails = cart.getCartDetails();
+
+        double totalPrice = 0;
+        for (CartDetail cartDetail : cartDetails) {
+            totalPrice += cartDetail.getPrice() * cartDetail.getQuantity();
+        }
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
         return "client/cart/show";
     }
     
