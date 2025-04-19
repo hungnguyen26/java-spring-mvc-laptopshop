@@ -105,6 +105,12 @@ public class User {
     public String getPhone() {
         return phone;
     }
+    public Cart getCart() {
+        return cart;
+    }
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
     public void setPhone(String phone) {
         this.phone = phone;
     }

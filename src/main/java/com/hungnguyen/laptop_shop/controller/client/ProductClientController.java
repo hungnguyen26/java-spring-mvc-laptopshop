@@ -41,10 +41,14 @@ public class ProductClientController {
 
         long product_id = id;
         String email = (String)session.getAttribute("email");
-        this.productService.handleAddProductToCart(email, product_id);
+        this.productService.handleAddProductToCart(email, product_id, session);
         return "redirect:/";
     }
     
+    @GetMapping("/cart")
+    public String getCartPage(Model model){
+        return "client/cart/show";
+    }
     
     
 }
