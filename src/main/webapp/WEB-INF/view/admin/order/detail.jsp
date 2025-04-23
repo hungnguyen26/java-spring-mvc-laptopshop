@@ -21,75 +21,66 @@ uri="http://www.springframework.org/tags/form" %>
     ></script>
   </head>
   <body class="sb-nav-fixed">
-    <jsp:include page="../layout/header.jsp"/>
+    <jsp:include page="../layout/header.jsp" />
     <div id="layoutSidenav">
-        <jsp:include page="../layout/sidebar.jsp"/>
+      <jsp:include page="../layout/sidebar.jsp" />
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Products</h1>
+            <h1 class="mt-4">Detail Orders</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Products</li>
+              <li class="breadcrumb-item"><a href="/order">Order</a></li>
+              <li class="breadcrumb-item active">View Detail</li>
             </ol>
-            <div class="mt-5">
+            <div class="container mt-5">
               <div class="row">
                 <div class="col-12 mx-auto">
                   <div class="d-flex justify-content-between">
-                    <h3>Table Product</h3>
-                    <a href="/admin/product/create" class="btn btn-primary"
-                      >Create Product</a
-                    >
+                    <h3>Order detail with id = ${id}</h3>
                   </div>
-
+        
                   <hr />
-
                   <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Factory</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Giá cả</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Thành tiền</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${products}" var="product">
+                      <c:forEach items="${orderDetails}" var="orderDetail">
                         <tr>
-                          <th>${product.id}</th>
-                          <td>${product.name}</td>
+                          <th>
+                            <img src="/images/product/${orderDetail.getProduct().getImage()}" alt="" style="width: 50px; height: 50px;">
+                          </th>
                           <td>
-                            <fmt:formatNumber type="number" value="${product.price}"/> đ
+                            <a href="/admin/product/${orderDetail.getProduct().getId()}">${orderDetail.getProduct().getName()}</a>
                           </td>
-                          <td>${product.factory}</td>
                           <td>
-                            <a
-                              href="/admin/product/${product.id}"
-                              class="btn btn-success"
-                              >View</a
-                            >
-                            <a
-                              href="/admin/product/update/${product.id}"
-                              class="btn btn-warning mx-2"
-                              >Update</a
-                            >
-                            <a
-                              href="/admin/product/delete/${product.id}"
-                              class="btn btn-danger"
-                              >Delete</a
-                            >
+                            <fmt:formatNumber type="number" value="${orderDetail.getProduct().getPrice()}"/> đ
+                          </td>
+                          <td>
+                            ${orderDetail.quantity}
+                          </td>
+                          <td>
+                            <fmt:formatNumber type="number" value="${orderDetail.getProduct().getPrice() * orderDetail.quantity}"/> đ
                           </td>
                         </tr>
                       </c:forEach>
                     </tbody>
                   </table>
+                  <a href="/admin/product" class="btn btn-success mt-3">Back</a>
+                  
                 </div>
               </div>
             </div>
           </div>
         </main>
-        <jsp:include page="../layout/footer.jsp"/>
+        <jsp:include page="../layout/footer.jsp" />
       </div>
     </div>
     <script
