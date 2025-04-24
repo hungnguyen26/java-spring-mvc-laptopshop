@@ -108,7 +108,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                <input data-cart-index="0" type="text" class="form-control form-control-sm text-center border-0" value="1">
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
