@@ -6,18 +6,26 @@ import org.springframework.stereotype.Service;
 
 import com.hungnguyen.laptop_shop.domain.Role;
 import com.hungnguyen.laptop_shop.domain.User;
+import com.hungnguyen.laptop_shop.repository.OrderRepository;
+import com.hungnguyen.laptop_shop.repository.ProductRepository;
 import com.hungnguyen.laptop_shop.domain.DTO.RegisterDTO;
 import com.hungnguyen.laptop_shop.repository.RoleRepository;
 import com.hungnguyen.laptop_shop.repository.UserRepository;
 
 @Service
 public class UserService {
+
+    private final OrderRepository orderRepository;
+
+    private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository,RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository,RoleRepository roleRepository, ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public String hanldeHello(){
@@ -62,5 +70,17 @@ public class UserService {
 
     public User getUserByEmail(String email){
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUser(){
+        return this.userRepository.count();
+    }
+
+    public long countProduct(){
+        return this.productRepository.count();
+    }
+
+    public long countOrder(){
+        return this.orderRepository.count();
     }
 }
